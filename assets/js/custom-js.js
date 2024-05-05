@@ -330,20 +330,6 @@ const reverseAnimation = () => {
 }
 reverseAnimation()
 
-const alertSwal = () => {
-    const warning = document.querySelector('.project__card-container')
-    warning.addEventListener('click', (e) => {
-        if (e.target.classList.contains('project__live-site')) {
-            Swal.fire({
-                title: "Coming Soon: Live Site Launch!",
-                text: "Wait for exciting updates!",
-                icon: "warning"
-            });
-        }
-    })
-}
-alertSwal()
-
 const projectCardContainer = document.querySelector('.project__card-container')
 const projectDetails = [
     {
@@ -353,16 +339,7 @@ const projectDetails = [
         information: 'An app that generates random advice',
         stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
         gitRef: 'https://github.com/KevinChristopherMorco/advice-generator-app',
-        liveSite: true
-    },
-
-    {
-        image: 'pictures/project-card/time-tracker.png',
-        title: 'Time Tracking Dashboard',
-        subtitle: 'Web Design',
-        information: 'A web template that allows users to track time.',
-        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/time-tracking-dashboard',
+        liveRef: 'https://advice-generator-app-sigma-umber.vercel.app/',
         liveSite: true
     },
 
@@ -373,16 +350,39 @@ const projectDetails = [
         information: 'An app that calculates tip percentage and total.',
         stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
         gitRef: 'https://github.com/KevinChristopherMorco/tip-calculator',
+        liveRef: 'https://tip-calculator-wheat-zeta.vercel.app/',
         liveSite: true
+    },
+
+    {
+        image: 'pictures/project-card/time-tracker.png',
+        title: 'Time Tracking Dashboard',
+        subtitle: 'Web Design',
+        information: 'A web template that allows users to track time.',
+        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
+        gitRef: 'https://github.com/KevinChristopherMorco/time-tracking-dashboard',
+        liveSite: false
     },
 ]
 
-const createNewElement = (parent, tag, customClass = []) => {
+const createNewElement = (parent, tag, customClass = null, attribute = null) => {
     const element = document.createElement(tag)
     parent.appendChild(element)
-    for (let i = 0; i < customClass.length; i++) {
-        element.classList.add(customClass[i])
+
+    if (attribute != null) {
+        for (let i = 0; i < attribute.length; i++) {
+            if (i % 2 == 0) {
+                element.setAttribute(attribute[i], attribute[i + 1])
+            }
+        }
     }
+
+    if (customClass != null) {
+        for (let i = 0; i < customClass.length; i++) {
+            element.classList.add(customClass[i])
+        }
+    }
+
     return element
 }
 
@@ -391,8 +391,7 @@ for (let i = 0; i < projectDetails.length; i++) {
 
     const createHeader = createNewElement(createMainContainer, 'div', ['project__header'])
     const createImageContainer = createNewElement(createHeader, 'div', ['project__image'])
-    const image = createNewElement(createImageContainer, 'img')
-    image.setAttribute('src', `${projectDetails[i].image}`)
+    createNewElement(createImageContainer, 'img', null, ['src', `${projectDetails[i].image}`])
 
     const projectContent = createNewElement(createMainContainer, 'div', ['project__content'])
     const projectTitle = createNewElement(projectContent, 'div', ['project__title-pos'])
@@ -414,20 +413,18 @@ for (let i = 0; i < projectDetails.length; i++) {
 
     const projectFooter = createNewElement(projectContent, 'div', ['project__footer'])
     if (projectDetails[i].liveSite === true) {
-        const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'])
-        createNewElement(liveSite, 'i',['fa-solid', 'fa-gamepad'])
+        const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${projectDetails[i].liveRef}`, 'target', '__blank'])
+
+        createNewElement(liveSite, 'i', ['fa-solid', 'fa-gamepad'])
         const liveText = createNewElement(liveSite, 'p', ['project__live-site'])
         liveText.textContent = 'Live Site'
 
     }
 
-    const gitSource = createNewElement(projectFooter, 'a')
-    createNewElement(gitSource, 'i',['fa-solid', 'fa-code'])
+    const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${projectDetails[i].gitRef}`, 'target', '__blank'])
+    createNewElement(gitSource, 'i', ['fa-solid', 'fa-code'])
     const gitText = createNewElement(gitSource, 'p')
     gitText.textContent = 'Source'
-    gitSource.setAttribute('href', `${projectDetails[i].gitRef}`)
-    gitSource.setAttribute('target', '__blank')
-
 }
 
 
