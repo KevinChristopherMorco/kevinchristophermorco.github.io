@@ -367,13 +367,13 @@ const projectDetails = [
     },
 
     {
-        image: 'pictures/project-card/faq-accordion.png',
-        title: 'FAQ Accordion',
-        subtitle: 'Web Design',
-        information: 'A FAQ web template',
+        image: 'pictures/project-card/tip-calculator.png',
+        title: 'Tip Calculator',
+        subtitle: 'Mini Project',
+        information: 'An app that calculates tip percentage and total.',
         stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/FAQ-accordion',
-        liveSite: false
+        gitRef: 'https://github.com/KevinChristopherMorco/tip-calculator',
+        liveSite: true
     },
 ]
 
