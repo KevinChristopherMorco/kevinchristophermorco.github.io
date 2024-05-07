@@ -333,13 +333,13 @@ reverseAnimation()
 const projectCardContainer = document.querySelector('.project__card-container')
 const projectDetails = [
     {
-        image: 'pictures/project-card/advice-app.png',
-        title: 'Advice Generator App',
+        image: 'pictures/project-card/ip-tracker.png',
+        title: 'IP Address Tracker',
         subtitle: 'Mini Project',
-        information: 'An app that generates random advice',
+        information: 'An app that tracks IP address details',
         stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/advice-generator-app',
-        liveRef: 'https://advice-generator-app-sigma-umber.vercel.app/',
+        gitRef: 'https://github.com/KevinChristopherMorco/ip-address-tracker',
+        liveRef: 'https://ip-address-tracker-phi-azure.vercel.app/',
         liveSite: true
     },
 
@@ -351,6 +351,17 @@ const projectDetails = [
         stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
         gitRef: 'https://github.com/KevinChristopherMorco/tip-calculator',
         liveRef: 'https://tip-calculator-wheat-zeta.vercel.app/',
+        liveSite: true
+    },
+    
+    {
+        image: 'pictures/project-card/advice-app.png',
+        title: 'Advice Generator App',
+        subtitle: 'Mini Project',
+        information: 'An app that generates random advice',
+        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
+        gitRef: 'https://github.com/KevinChristopherMorco/advice-generator-app',
+        liveRef: 'https://advice-generator-app-sigma-umber.vercel.app/',
         liveSite: true
     },
 
