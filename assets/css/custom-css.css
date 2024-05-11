@@ -10,7 +10,7 @@
   --btn-component-bg-focus: #fff;
   --btn-component-text-focus: #000;
   --border-color: #fff;
-  --header-color: rgba(0, 0, 0,0.8);
+  --header-color: rgba(0, 0, 0, 0.8);
 
   /* Brands */
   --linkedIn: #0077B5;
@@ -109,8 +109,15 @@ header {
 
 
 .nav__main-container .nav__logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: var(--text-color);
   font-size: 1.10rem;
+}
+
+.nav__main-container .nav__logo-container>img {
+  height: 20px;
 }
 
 .nav__main-container .nav__hamburger-container {
@@ -131,7 +138,7 @@ header {
   stroke-width: 2px;
 }
 
-.nav__main-container > ul {
+.nav__main-container>ul {
   display: none;
 }
 
@@ -175,7 +182,7 @@ section {
   }
 }
 
-.heading{
+.heading {
   font-size: 1.75rem;
   font-weight: bolder;
 }
@@ -551,18 +558,18 @@ footer {
 }
 
 
-.next__content-container  .random__stuffs-container .random__list>ul {
+.next__content-container .random__stuffs-container .random__list>ul {
   list-style: square;
   list-style-position: inside;
 }
 
-.next__content-container  .random__stuffs-container .random__list>ul>li {
+.next__content-container .random__stuffs-container .random__list>ul>li {
   padding: 1rem 0;
   font-size: 1.25rem;
   font-weight: 400;
 }
 
-.next__content-container  .tech__stack-container .text__stack-card-container {
+.next__content-container .tech__stack-container .text__stack-card-container {
   padding: 1rem 0;
   background-color: var(--body-bg);
   display: flex;
@@ -570,7 +577,7 @@ footer {
   flex-wrap: wrap;
 }
 
-.next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card{
+.next__content-container .tech__stack-container .text__stack-card-container .text__stack-card {
   padding: 1rem;
   width: 50%;
   display: flex;
@@ -578,11 +585,11 @@ footer {
   align-items: center;
 }
 
-.next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > i{
+.next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>i {
   font-size: 2rem;
 }
 
-.next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > p{
+.next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>p {
   font-size: 1rem;
 }
 
@@ -659,25 +666,26 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   }
 }
 
-
-
-
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
+  .nav__main-container .nav__logo-container>img {
+    height: 30px;
+  }
+
   .main__content-container {
     width: 90%;
     margin: 0 auto;
   }
 
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card{
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card {
     width: 40%;
     justify-content: space-evenly;
   }
- 
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > i{
+
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>i {
     font-size: 3rem;
   }
-  
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > p{
+
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>p {
     font-size: 1.5rem;
   }
 }
@@ -686,27 +694,31 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   .nav__main-container {
     padding: 1.5rem;
   }
-  
-  .nav__main-container .nav__hamburger-container{
+  .nav__main-container .nav__logo-container>img {
+    height: 30px;
+  }
+
+
+  .nav__main-container .nav__hamburger-container {
     display: none;
   }
 
-  .nav__main-container > ul{
+  .nav__main-container>ul {
     width: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
 
-  .nav__main-container ul > li {
-   list-style: none;
+  .nav__main-container ul>li {
+    list-style: none;
   }
 
-  .nav__main-container ul > li > a {
+  .nav__main-container ul>li>a {
     font-size: 1.25rem;
     text-decoration: none;
     color: var(--text-color);
-   }
+  }
 
 
   .main__content-container {
@@ -714,7 +726,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     margin: 0 auto;
   }
 
-  .heading{
+  .heading {
     font-size: 2.5rem;
     padding: 2rem 0;
   }
@@ -773,11 +785,11 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     display: flex;
   }
 
-  .project__container .project__card-container .project__card  .project__header {
+  .project__container .project__card-container .project__card .project__header {
     width: 50%;
   }
 
-  .project__container .project__card-container .project__card .project__header  .project__image {
+  .project__container .project__card-container .project__card .project__header .project__image {
     height: 100%;
     width: 100%;
   }
@@ -837,20 +849,20 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     font-size: 1.75rem;
   }
 
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card{
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card {
     width: 30%;
     justify-content: space-evenly;
   }
- 
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > i{
+
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>i {
     font-size: 5rem;
   }
-  
-  .next__content-container  .tech__stack-container .text__stack-card-container .text__stack-card > p{
+
+  .next__content-container .tech__stack-container .text__stack-card-container .text__stack-card>p {
     font-size: 2rem;
   }
 
-  .next__content-container  .random__stuffs-container .random__list>ul>li {
+  .next__content-container .random__stuffs-container .random__list>ul>li {
     padding: 1rem 0;
     font-size: 1.75rem;
   }
@@ -872,7 +884,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 
 @media only screen and (min-width: 1920px) {
 
-  .nav__main-container{
+  .nav__main-container {
     width: 70%;
   }
 
@@ -880,11 +892,11 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
     width: 70%;
     margin: 0 auto;
   }
-  
+
   .next__content-container {
     width: 70%;
     margin: 0 auto;
-}
+  }
 
 
   footer {
@@ -893,4 +905,3 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   }
 
 }
-
