@@ -331,50 +331,6 @@ const reverseAnimation = () => {
 reverseAnimation()
 
 const projectCardContainer = document.querySelector('.project__card-container')
-const projectDetails = [
-    {
-        image: 'pictures/project-card/ip-tracker.png',
-        title: 'IP Address Tracker',
-        subtitle: 'Mini Project',
-        information: 'An app that tracks IP address details',
-        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/ip-address-tracker',
-        liveRef: 'https://ip-address-tracker-phi-azure.vercel.app/',
-        liveSite: true
-    },
-
-    {
-        image: 'pictures/project-card/tip-calculator.png',
-        title: 'Tip Calculator',
-        subtitle: 'Mini Project',
-        information: 'An app that calculates tip percentage and total.',
-        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/tip-calculator',
-        liveRef: 'https://tip-calculator-wheat-zeta.vercel.app/',
-        liveSite: true
-    },
-    
-    {
-        image: 'pictures/project-card/advice-app.png',
-        title: 'Advice Generator App',
-        subtitle: 'Mini Project',
-        information: 'An app that generates random advice',
-        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/advice-generator-app',
-        liveRef: 'https://advice-generator-app-sigma-umber.vercel.app/',
-        liveSite: true
-    },
-
-    {
-        image: 'pictures/project-card/time-tracker.png',
-        title: 'Time Tracking Dashboard',
-        subtitle: 'Web Design',
-        information: 'A web template that allows users to track time.',
-        stack: ['fa-html5', 'fa-css3', 'fa-square-js'],
-        gitRef: 'https://github.com/KevinChristopherMorco/time-tracking-dashboard',
-        liveSite: false
-    },
-]
 
 const createNewElement = (parent, tag, customClass = null, attribute = null) => {
     const element = document.createElement(tag)
@@ -397,45 +353,54 @@ const createNewElement = (parent, tag, customClass = null, attribute = null) => 
     return element
 }
 
-for (let i = 0; i < projectDetails.length; i++) {
-    const createMainContainer = createNewElement(projectCardContainer, 'div', ['project__card', 'wow', 'fadeInUp'])
-
-    const createHeader = createNewElement(createMainContainer, 'div', ['project__header'])
-    const createImageContainer = createNewElement(createHeader, 'div', ['project__image'])
-    createNewElement(createImageContainer, 'img', null, ['src', `${projectDetails[i].image}`])
-
-    const projectContent = createNewElement(createMainContainer, 'div', ['project__content'])
-    const projectTitle = createNewElement(projectContent, 'div', ['project__title-pos'])
-
-    const title = createNewElement(projectTitle, 'p')
-    title.textContent = `${projectDetails[i].title}`
-    const subtitle = createNewElement(projectTitle, 'p')
-    subtitle.textContent = `${projectDetails[i].subtitle}`
-
-    const projectInfo = createNewElement(projectContent, 'div', ['project__info'])
-    projectInfo.textContent = `${projectDetails[i].information}`
-    const projectStack = createNewElement(projectContent, 'div', ['project__stack'])
-    const stackContainer = createNewElement(projectStack, 'ul')
-
-    for (let j = 0; j < projectDetails[i].stack.length; j++) {
-        const stackList = createNewElement(stackContainer, 'li')
-        createNewElement(stackList, 'i', ['fa-brands', `${projectDetails[i].stack[j]}`])
-    }
-
-    const projectFooter = createNewElement(projectContent, 'div', ['project__footer'])
-    if (projectDetails[i].liveSite === true) {
-        const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${projectDetails[i].liveRef}`, 'target', '__blank'])
-
-        createNewElement(liveSite, 'i', ['fa-solid', 'fa-gamepad'])
-        const liveText = createNewElement(liveSite, 'p', ['project__live-site'])
-        liveText.textContent = 'Live Site'
-
-    }
-
-    const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${projectDetails[i].gitRef}`, 'target', '__blank'])
-    createNewElement(gitSource, 'i', ['fa-solid', 'fa-code'])
-    const gitText = createNewElement(gitSource, 'p')
-    gitText.textContent = 'Source'
+const fetchData = () => {
+    fetch('../../json/projects.json').then(response => response.json()).then(data => renderProject(data)).catch((error) => {
+        error.log(error)
+        console.log('Please contact the developer')
+    })
 }
 
+const renderProject = (data) => {
+    for (let i = 0; i < data.length; i++) {
+        const createMainContainer = createNewElement(projectCardContainer, 'div', ['project__card', 'wow', 'fadeInUp'])
 
+        const createHeader = createNewElement(createMainContainer, 'div', ['project__header'])
+        const createImageContainer = createNewElement(createHeader, 'div', ['project__image'])
+        createNewElement(createImageContainer, 'img', null, ['src', `${data[i].image}`])
+
+        const projectContent = createNewElement(createMainContainer, 'div', ['project__content'])
+        const projectTitle = createNewElement(projectContent, 'div', ['project__title-pos'])
+
+        const title = createNewElement(projectTitle, 'p')
+        title.textContent = `${data[i].title}`
+        const subtitle = createNewElement(projectTitle, 'p')
+        subtitle.textContent = `${data[i].subtitle}`
+
+        const projectInfo = createNewElement(projectContent, 'div', ['project__info'])
+        projectInfo.textContent = `${data[i].information}`
+        const projectStack = createNewElement(projectContent, 'div', ['project__stack'])
+        const stackContainer = createNewElement(projectStack, 'ul')
+
+        for (let j = 0; j < data[i].stack.length; j++) {
+            const stackList = createNewElement(stackContainer, 'li')
+            createNewElement(stackList, 'i', ['fa-brands', `${data[i].stack[j]}`])
+        }
+
+        const projectFooter = createNewElement(projectContent, 'div', ['project__footer'])
+        if (data[i].liveSite === true) {
+            const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${data[i].liveRef}`, 'target', '__blank'])
+
+            createNewElement(liveSite, 'i', ['fa-solid', 'fa-gamepad'])
+            const liveText = createNewElement(liveSite, 'p', ['project__live-site'])
+            liveText.textContent = 'Live Site'
+
+        }
+
+        const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${data[i].gitRef}`, 'target', '__blank'])
+        createNewElement(gitSource, 'i', ['fa-solid', 'fa-code'])
+        const gitText = createNewElement(gitSource, 'p')
+        gitText.textContent = 'Source'
+    }
+}
+
+fetchData()
