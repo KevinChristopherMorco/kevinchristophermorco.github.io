@@ -32,17 +32,19 @@ imageLoad()
 const hamburgerIcon = document.querySelector('.nav__hamburger-container')
 const hamburgerWrapper = document.querySelector('.hamburger__wrapper')
 const hamburgerContent = document.querySelector('.hamburger__container')
-const closehamburgerWrapper = document.querySelector('.close-hamburger')
-
 const hamburgerOverlay = document.querySelectorAll('.hamburger__overlay-bg')
+
+const closehamburgerWrapper = document.querySelector('.close-hamburger')
 
 const animation = () => {
 
-    hamburgerIcon.addEventListener('click', (e) => {
+    const showHamburgerMenu = () => {
         hamburgerWrapper.classList.add('show')
-    })
+    }
 
-    closehamburgerWrapper.addEventListener('click', (e) => {
+    hamburgerIcon.addEventListener('click', showHamburgerMenu)
+
+    const hideHamburgerMenu = () => {
         hamburgerContent.style.cssText = `animation:hamburgerAnimationReverse 0.5s ease-in-out; animation-delay: ${0.5}s;`
 
         let setDelay = 0
@@ -60,139 +62,66 @@ const animation = () => {
             })
             hamburgerContent.removeAttribute('style')
         }, 1000)
-    })
+    }
+
+    closehamburgerWrapper.addEventListener('click', hideHamburgerMenu)
+
 }
 animation()
 
 //Manipulate theme
 const theme = () => {
     const heroTheme = document.querySelector('.hero__theme-container')
-    const lightTheme = document.querySelector('.light-theme')
-    const darkTheme = document.querySelector('.dark-theme')
-    const brownTheme = document.querySelector('.brown-theme')
-    const blueTheme = document.querySelector('.blue-theme')
-
     const logo = document.querySelector('.nav__logo-container > img')
 
-    heroTheme.addEventListener('click', (e) => {
-        if (e.target.classList.contains('hero__theme')) {
-            const theme = Array.from(heroTheme.children);
-            theme.forEach(theme => {
-                theme.classList.remove('hero__theme--active')
-            })
-            e.target.classList.add('hero__theme--active')
-        }
+    fetch('../json/theme.json').then(response => response.json()).then(themes => fetchTheme(themes)).catch((error) => {
+        error.log(error)
+        console.log('Please contact the developer')
     })
 
-    const darkThemeColor = {
-        '--body-bg': '#000',
-        '--component-bg': '#000',
-        '--text-color': '#fff',
-        '--btn-component-bg-focus': '#fff',
-        '--btn-component-text-focus': '#000',
-        '--border-color': '#fff',
-        '--header-color': 'rgba(0, 0, 0,0.8)',
-
-
-        '--first-theme-gradient': '#007bff',
-        '--second-theme-gradient': '#e83e8c',
-        '--third-theme-gradient': '#00F7F7',
-        '--fourth-theme-gradient': '#ffc107',
-        '--fifth-theme-gradient': '#fd7e14',
-        '--sixth-theme-gradient': '#20c997',
-
-        '--first-overlay': '#FEFAF6',
-        '--second-overlay': '#E0E0E0',
-    };
-
-
-    const lightThemeColor = {
-        '--body-bg': '#e0e0e0',
-        '--component-bg': '#ffffff',
-        '--text-color': '#263238',
-        '--btn-component-bg-focus': '#DA0170',
-        '--btn-component-text-focus': '#ffffff',
-        '--border-color': '#90a4ae',
-        '--header-color': 'rgba(255, 255, 255,0.8)',
-
-        '--first-theme-gradient': '#DA0170',
-        '--second-theme-gradient': '#EE99C2',
-        '--third-theme-gradient': '#29ADB2',
-        '--fourth-theme-gradient': '#4CC34F',
-        '--fifth-theme-gradient': '#4D4C7D',
-        '--sixth-theme-gradient': '#F99417',
-
-        '--first-overlay': '#DA0170',
-        '--second-overlay': '#874CCC',
-    };
-
-    const brownThemeColor = {
-        '--body-bg': '#ECCA9C',
-        '--component-bg': '#DAA879',
-        '--text-color': '#3d291e',
-        '--btn-component-bg-focus': '#5c3d30',
-        '--btn-component-text-focus': '#fff',
-        '--border-color': '#7B5228',
-        '--header-color': 'rgba(236, 202, 156,0.8)',
-
-        '--first-theme-gradient': '#E86260',
-        '--second-theme-gradient': '#43766C',
-        '--third-theme-gradient': '#453F78',
-        '--fourth-theme-gradient': '#795458',
-        '--fifth-theme-gradient': '#6D2932',
-        '--sixth-theme-gradient': '#D24545',
-
-        '--first-overlay': '#5C3D30',
-        '--second-overlay': '#9B3922',
-    };
-
-    const blueThemeColor = {
-        '--body-bg': '#e0f7fa',
-        '--component-bg': '#ffffff',
-        '--text-color': '#37474f',
-        '--btn-component-bg-focus': '#2196f3',
-        '--btn-component-text-focus': '#ffffff',
-        '--border-color': '#90a4ae',
-        '--header-color': 'rgba(224, 247, 250,0.8)',
-
-        '--first-theme-gradient': '#874CCC',
-        '--second-theme-gradient': '#C65BCF',
-        '--third-theme-gradient': '#EEC759',
-        '--fourth-theme-gradient': '#B1C381',
-        '--fifth-theme-gradient': '#210062',
-        '--sixth-theme-gradient': '#77037B',
-
-        '--first-overlay': '#2196F3',
-        '--second-overlay': '#9400FF',
-    };
-
-    const setTheme = (selectedTheme) => {
-        Object.entries(selectedTheme).forEach(key => {
+    const setTheme = (theme) => {
+        Object.entries(theme).forEach(key => {
             document.documentElement.style.setProperty(key[0], key[1])
         })
     }
 
-    lightTheme.addEventListener('click', (e) => {
-        setTheme(lightThemeColor)
-        logo.setAttribute('src', 'pictures/logo/lighttheme-logo.png')
-    })
+    const fetchTheme = (themes) => {
+        const handleThemeClick = (e) => {
+            if (e.target.classList.contains('hero__theme')) {
+                const theme = Array.from(heroTheme.children);
+                theme.forEach(theme => {
+                    theme.classList.remove('hero__theme--active')
+                })
+                e.target.classList.add('hero__theme--active')
+            }
 
-    darkTheme.addEventListener('click', (e) => {
-        setTheme(darkThemeColor)
-        logo.setAttribute('src', 'pictures/logo/darktheme-logo.png')
+            switch (e.target.id) {
+                case 'light-theme':
+                    setTheme(themes.lightThemeColor)
+                    logo.setAttribute('src', 'pictures/logo/lighttheme-logo.png')
+                    break;
 
-    })
+                case 'dark-theme':
+                    setTheme(themes.darkThemeColor)
+                    logo.setAttribute('src', 'pictures/logo/darktheme-logo.png')
+                    break;
 
-    brownTheme.addEventListener('click', (e) => {
-        setTheme(brownThemeColor)
-        logo.setAttribute('src', 'pictures/logo/browntheme-logo.png')
+                case 'brown-theme':
+                    setTheme(themes.brownThemeColor)
+                    logo.setAttribute('src', 'pictures/logo/browntheme-logo.png')
+                    break;
 
-    })
+                case 'blue-theme':
+                    setTheme(themes.blueThemeColor)
+                    logo.setAttribute('src', 'pictures/logo/bluetheme-logo.png')
+                    break;
 
-    blueTheme.addEventListener('click', (e) => {
-        setTheme(blueThemeColor)
-        logo.setAttribute('src', 'pictures/logo/bluetheme-logo.png')
-    })
+                default:
+                    break;
+            }
+        }
+        heroTheme.addEventListener('click', handleThemeClick)
+    }
 }
 theme()
 
@@ -249,7 +178,8 @@ let nextPage = () => {
 nextPage()
 
 //Previous Page and list
-mainList.addEventListener('click', (e) => {
+
+const handleListItem = (e) => {
     const listName = ['About', 'Projects', 'Contacts']
     const listId = ['about', 'project', 'contact']
 
@@ -271,38 +201,15 @@ mainList.addEventListener('click', (e) => {
             createList.appendChild(createAnchor)
         }
 
+        //for newer browsers that suuports documentElement property
         document.documentElement.scrollTop = 0;
+        //for older browsers that doesnt support documentElement property
         document.body.scrollTop = 0;
     }
-})
+}
 
-hamburgerList.addEventListener('click', (e) => {
-    const listName = ['About', 'Projects', 'Contacts']
-    const listId = ['about', 'project', 'contact']
+mainList.addEventListener('click', handleListItem)
 
-    if (e.target.classList.contains('home')) {
-        while (hamburgerList.firstChild) {
-            hamburgerList.removeChild(hamburgerList.firstChild);
-        }
-        mainSection.style.cssText = 'display:block;'
-        nextContent.style.cssText = 'display:none;'
-        header.style.cssText = 'animation:opacity 2s forwards;'
-
-
-        for (let i = 0; i < listName.length; i++) {
-            const createList = document.createElement('li')
-            hamburgerList.appendChild(createList)
-
-            const createAnchor = document.createElement('a')
-            createAnchor.href = `#${listId[i]}`
-            createAnchor.textContent = `${listName[i]}`
-            createList.appendChild(createAnchor)
-        }
-
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-    }
-})
 
 //Reverse hamburger animation
 const reverseAnimation = () => {
@@ -353,42 +260,42 @@ const createNewElement = (parent, tag, customClass = null, attribute = null) => 
     return element
 }
 
-const fetchData = () => {
-    fetch('../../json/projects.json').then(response => response.json()).then(data => renderProject(data)).catch((error) => {
+const fetchProject = () => {
+    fetch('../../json/projects.json').then(response => response.json()).then(projectData => renderProject(projectData)).catch((error) => {
         error.log(error)
         console.log('Please contact the developer')
     })
 }
 
-const renderProject = (data) => {
-    for (let i = 0; i < data.length; i++) {
+const renderProject = (projectData) => {
+    for (let i = 0; i < projectData.length; i++) {
         const createMainContainer = createNewElement(projectCardContainer, 'div', ['project__card', 'wow', 'fadeInUp'])
 
         const createHeader = createNewElement(createMainContainer, 'div', ['project__header'])
         const createImageContainer = createNewElement(createHeader, 'div', ['project__image'])
-        createNewElement(createImageContainer, 'img', null, ['src', `${data[i].image}`])
+        createNewElement(createImageContainer, 'img', null, ['src', `${projectData[i].image}`])
 
         const projectContent = createNewElement(createMainContainer, 'div', ['project__content'])
         const projectTitle = createNewElement(projectContent, 'div', ['project__title-pos'])
 
         const title = createNewElement(projectTitle, 'p')
-        title.textContent = `${data[i].title}`
+        title.textContent = `${projectData[i].title}`
         const subtitle = createNewElement(projectTitle, 'p')
-        subtitle.textContent = `${data[i].subtitle}`
+        subtitle.textContent = `${projectData[i].subtitle}`
 
         const projectInfo = createNewElement(projectContent, 'div', ['project__info'])
-        projectInfo.textContent = `${data[i].information}`
+        projectInfo.textContent = `${projectData[i].information}`
         const projectStack = createNewElement(projectContent, 'div', ['project__stack'])
         const stackContainer = createNewElement(projectStack, 'ul')
 
-        for (let j = 0; j < data[i].stack.length; j++) {
+        for (let j = 0; j < projectData[i].stack.length; j++) {
             const stackList = createNewElement(stackContainer, 'li')
-            createNewElement(stackList, 'i', ['fa-brands', `${data[i].stack[j]}`])
+            createNewElement(stackList, 'i', ['fa-brands', `${projectData[i].stack[j]}`])
         }
 
         const projectFooter = createNewElement(projectContent, 'div', ['project__footer'])
-        if (data[i].liveSite === true) {
-            const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${data[i].liveRef}`, 'target', '__blank'])
+        if (projectData[i].liveSite === true) {
+            const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${projectData[i].liveRef}`, 'target', '__blank'])
 
             createNewElement(liveSite, 'i', ['fa-solid', 'fa-gamepad'])
             const liveText = createNewElement(liveSite, 'p', ['project__live-site'])
@@ -396,11 +303,11 @@ const renderProject = (data) => {
 
         }
 
-        const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${data[i].gitRef}`, 'target', '__blank'])
+        const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${projectData[i].gitRef}`, 'target', '__blank'])
         createNewElement(gitSource, 'i', ['fa-solid', 'fa-code'])
         const gitText = createNewElement(gitSource, 'p')
         gitText.textContent = 'Source'
     }
 }
 
-fetchData()
+fetchProject()
