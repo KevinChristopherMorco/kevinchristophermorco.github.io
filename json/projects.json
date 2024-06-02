@@ -1,5 +1,15 @@
 [
     {
+        "image": "pictures/project-card/dictionary-app.png",
+        "title": "Word Dictionary",
+        "subtitle": "Mini Project",
+        "information": "An app that gets the meaning of words",
+        "stack": ["fa-html5", "fa-css3", "fa-square-js"],
+        "gitRef": "https://github.com/KevinChristopherMorco/word-dictionary",
+        "liveRef": "https://word-dictionary-iota.vercel.app/",
+        "liveSite": true
+    },
+    {
         "image": "pictures/project-card/ip-tracker.png",
         "title": "IP Address Tracker",
         "subtitle": "Mini Project",
