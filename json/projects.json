@@ -27,7 +27,7 @@
         "information": "Global Pulse is a news app that lets you browse the news.",
         "stack": ["fa-html5", "fa-css3", "fa-square-js"],
         "gitRef": "https://github.com/KevinChristopherMorco/news-app",
-        "liveRef": "https://news-app-lake-seven.vercel.app/",
+        "liveRef": "https://news-app-zeta-sage.vercel.app/",
         "liveSite": true
     },
 
