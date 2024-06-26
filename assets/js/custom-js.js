@@ -1,3 +1,6 @@
+import './theme.js'
+import './render-project.js'
+
 //Hero image view
 const imageLoad = () => {
     const heroImage = document.querySelector('.hero__start-img > img')
@@ -69,61 +72,6 @@ const animation = () => {
 }
 animation()
 
-//Manipulate theme
-const theme = () => {
-    const heroTheme = document.querySelector('.hero__theme-container')
-    const logo = document.querySelector('.nav__logo-container > img')
-
-    fetch('../json/theme.json').then(response => response.json()).then(themes => fetchTheme(themes)).catch((error) => {
-        error.log(error)
-        console.log('Please contact the developer')
-    })
-
-    const setTheme = (theme) => {
-        Object.entries(theme).forEach(key => {
-            document.documentElement.style.setProperty(key[0], key[1])
-        })
-    }
-
-    const fetchTheme = (themes) => {
-        const handleThemeClick = (e) => {
-            if (e.target.classList.contains('hero__theme')) {
-                const theme = Array.from(heroTheme.children);
-                theme.forEach(theme => {
-                    theme.classList.remove('hero__theme--active')
-                })
-                e.target.classList.add('hero__theme--active')
-            }
-
-            switch (e.target.id) {
-                case 'light-theme':
-                    setTheme(themes.lightThemeColor)
-                    logo.setAttribute('src', 'pictures/logo/lighttheme-logo.png')
-                    break;
-
-                case 'dark-theme':
-                    setTheme(themes.darkThemeColor)
-                    logo.setAttribute('src', 'pictures/logo/darktheme-logo.png')
-                    break;
-
-                case 'brown-theme':
-                    setTheme(themes.brownThemeColor)
-                    logo.setAttribute('src', 'pictures/logo/browntheme-logo.png')
-                    break;
-
-                case 'blue-theme':
-                    setTheme(themes.blueThemeColor)
-                    logo.setAttribute('src', 'pictures/logo/bluetheme-logo.png')
-                    break;
-
-                default:
-                    break;
-            }
-        }
-        heroTheme.addEventListener('click', handleThemeClick)
-    }
-}
-theme()
 
 //View Next Page
 const nextSection = document.querySelector('.about__extra-info')
@@ -259,55 +207,3 @@ const createNewElement = (parent, tag, customClass = null, attribute = null) => 
 
     return element
 }
-
-const fetchProject = () => {
-    fetch('../../json/projects.json').then(response => response.json()).then(projectData => renderProject(projectData)).catch((error) => {
-        error.log(error)
-        console.log('Please contact the developer')
-    })
-}
-
-const renderProject = (projectData) => {
-    for (let i = 0; i < projectData.length; i++) {
-        const createMainContainer = createNewElement(projectCardContainer, 'div', ['project__card', 'wow', 'fadeInUp'])
-
-        const createHeader = createNewElement(createMainContainer, 'div', ['project__header'])
-        const createImageContainer = createNewElement(createHeader, 'div', ['project__image'])
-        createNewElement(createImageContainer, 'img', null, ['src', `${projectData[i].image}`])
-
-        const projectContent = createNewElement(createMainContainer, 'div', ['project__content'])
-        const projectTitle = createNewElement(projectContent, 'div', ['project__title-pos'])
-
-        const title = createNewElement(projectTitle, 'p')
-        title.textContent = `${projectData[i].title}`
-        const subtitle = createNewElement(projectTitle, 'p')
-        subtitle.textContent = `${projectData[i].subtitle}`
-
-        const projectInfo = createNewElement(projectContent, 'div', ['project__info'])
-        projectInfo.textContent = `${projectData[i].information}`
-        const projectStack = createNewElement(projectContent, 'div', ['project__stack'])
-        const stackContainer = createNewElement(projectStack, 'ul')
-
-        for (let j = 0; j < projectData[i].stack.length; j++) {
-            const stackList = createNewElement(stackContainer, 'li')
-            createNewElement(stackList, 'i', ['fa-brands', `${projectData[i].stack[j]}`])
-        }
-
-        const projectFooter = createNewElement(projectContent, 'div', ['project__footer'])
-        if (projectData[i].liveSite === true) {
-            const liveSite = createNewElement(projectFooter, 'a', ['project__live-site'], ['href', `${projectData[i].liveRef}`, 'target', '__blank'])
-
-            createNewElement(liveSite, 'i', ['fa-solid', 'fa-gamepad'])
-            const liveText = createNewElement(liveSite, 'p', ['project__live-site'])
-            liveText.textContent = 'Live Site'
-
-        }
-
-        const gitSource = createNewElement(projectFooter, 'a', null, ['href', `${projectData[i].gitRef}`, 'target', '__blank'])
-        createNewElement(gitSource, 'i', ['fa-solid', 'fa-code'])
-        const gitText = createNewElement(gitSource, 'p')
-        gitText.textContent = 'Source'
-    }
-}
-
-fetchProject()
