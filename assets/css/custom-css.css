@@ -67,6 +67,15 @@ body,
 html {
   width: 100%;
   background-color: var(--body-bg);
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: var(--btn-component-bg-focus);
 }
 
 main {
@@ -632,10 +641,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   color: var(--btn-component-text-focus) !important;
 }
 
-
-
-
-
+/*Animation*/
 @keyframes hamburgerAnimation {
   from {
     height: 0%;
