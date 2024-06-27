@@ -89,7 +89,7 @@
           <p>Projects</p>
         </div>
         <div class='project__card-container'>
-
+          <!-- Dynamic Contents -->
         </div>
       </section>
     </div>
@@ -238,9 +238,6 @@
       </section>
     </div>
   </main>
-
-
-
   <footer class="wow fadeInUp" id="contact">
     <div class="closing_message">
       <p>Hey there!</p>
@@ -280,8 +277,35 @@
       </div>
     </div>
   </div>
+
+  <template id="card__template">
+    <div class="project__card wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+      <div class="project__header">
+        <div class="project__image"><img src="pictures/project-card/dictionary-app.png"></div>
+      </div>
+      <div class="project__content">
+        <div class="project__title-pos">
+          <p>Word Dictionary</p>
+          <p>Mini Project</p>
+        </div>
+        <div class="project__info">An app that gets the meaning of words.</div>
+        <div class="project__stack">
+          <ul>
+            <!-- Dynamic List Icons -->
+          </ul>
+        </div>
+      </div>
+      <div class="project__footer"><a href="https://word-dictionary-iota.vercel.app/" target="__blank"
+        class="project__live-site"><i class="fa-solid fa-gamepad" aria-hidden="true"></i>
+        <p class="project__live-text">Live Site</p>
+      </a><a href="https://github.com/KevinChristopherMorco/word-dictionary" target="__blank" class="project__git"><i
+          class="fa-solid fa-code" aria-hidden="true"></i>
+        <p>Source</p>
+      </a></div>
+    </div>
+  </template>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="assets/js/custom-js.js"></script>
+  <script src="assets/js/custom-js.js" type="module"></script>
   <script src="lib/wow/dist/wow.js"></script>
   <script>
     wow = new WOW(
