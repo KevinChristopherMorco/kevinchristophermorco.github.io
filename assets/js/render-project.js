@@ -3,13 +3,12 @@ const projectCardContainer = document.querySelector('.project__card-container')
 
 const fetchProject = () => {
     fetch('../../json/projects.json').then(response => response.json()).then(projectData => renderProject(projectData)).catch((error) => {
-        console.log(error)
+        console.error(error)
         console.log('Please contact the developer')
     })
 }
 
 const renderProject = (projectData) => {
-    console.log(projectData)
     for (let i = 0; i < projectData.length; i++) {
         const {image,title,subtitle,information,stack,gitRef,liveRef,liveSite} = projectData[i]
         const cardNode = cardTemplate.content.cloneNode(true)
@@ -33,9 +32,7 @@ const renderProject = (projectData) => {
         if(liveSite != true){
              cardNode.querySelector('.project__footer .project__live-site').remove()
         }
-
         projectCardContainer.appendChild(cardNode)
     }
 }
-
 window.addEventListener('load',fetchProject)

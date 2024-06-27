@@ -64,7 +64,10 @@ heroTheme.addEventListener('click', (e) => fetchTheme(e))
 const storageTheme = (theme) => {
     const storageTheme = localStorage.getItem('theme')
     const storageLogo = localStorage.getItem('logo')
-    if(storageTheme === null && storageLogo === null)return;
+    if(storageTheme === null && storageLogo === null){
+        localStorage.setItem('logo', 'pictures/logo/darktheme-logo.png')
+        localStorage.setItem('theme', 'darkThemeColor')
+    };
 
     logo.setAttribute('src', storageLogo)
     setTheme(theme[storageTheme])
@@ -89,6 +92,7 @@ const getState = () => {
     theme.forEach(theme => {
         theme.classList.remove('hero__theme--active')
     })
+    if(localStorage.getItem('activeState') === null) return;
     const activeIndex = JSON.parse(localStorage.getItem('activeState'))
     theme[activeIndex].classList.add('hero__theme--active')
 }
