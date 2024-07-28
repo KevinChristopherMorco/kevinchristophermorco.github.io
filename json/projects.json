@@ -1,10 +1,20 @@
 [
   {
+    "image": "pictures/project-card/country-app.png",
+    "title": "Where in the world?",
+    "subtitle": "Mini Project",
+    "information": "Find interesting facts about every country in the world! ",
+    "stack": ["fa-html5", "fa-css3", "fa-square-js", "fa-react"],
+    "gitRef": "https://github.com/KevinChristopherMorco/our-homeland",
+    "liveRef": "https://keeper-puce.vercel.app/",
+    "liveSite": true
+  },
+  {
     "image": "pictures/project-card/keeper-app.png",
     "title": "Keeper",
     "subtitle": "Mini Project",
     "information": "An app that lets you create notes.",
-    "stack": ["fa-html5", "fa-css3", "fa-square-js"],
+    "stack": ["fa-html5", "fa-css3", "fa-square-js", "fa-react"],
     "gitRef": "https://github.com/KevinChristopherMorco/Keeper",
     "liveRef": "https://keeper-puce.vercel.app/",
     "liveSite": true
